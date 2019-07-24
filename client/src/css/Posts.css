@@ -1,0 +1,30 @@
+.Posts{
+    padding-top: 12px;
+    /* background-color: blue; */
+}
+.Posts .create-post{
+    background-color: rgba(156, 150, 150, 0.418)
+}
+.Posts .image{
+    background-color: rgba(156, 150, 150, 0.418)
+}
+.Posts label{
+    cursor: pointer;
+}
+.Posts label:hover{
+    border-radius: 25%;
+    background-color: rgba(204, 198, 198, 0.753);
+}
+
+/* FOR  OutputPosts.js  */
+.post-bottom{
+    border: 1.5px solid rgba(184, 182, 182, 0.836);
+}
+.post-bottom div{
+    cursor: pointer;
+    /* border: 2px solid white; */
+}
+.post-bottom div:hover{
+    border-radius: 50%;
+    background-color: rgba(175, 173, 173, 0.295);
+}

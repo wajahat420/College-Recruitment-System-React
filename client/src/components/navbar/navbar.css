@@ -1,0 +1,23 @@
+.nav li{
+    margin: 0px 10px;
+}
+.navbar-header a{
+    font-size: 1.5em;
+}
+.navbar-default,.navbar{
+    /* margin: 0px; */
+    padding: 0px
+}
+.navbar{
+    padding: 5px;
+    background-color: black;
+    color: white
+}
+.navbar a{
+    
+    color: white;
+}
+.active-class{
+    color: blueviolet;
+    text-decoration: underline;
+}
