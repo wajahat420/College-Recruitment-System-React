@@ -1,0 +1,14 @@
+.sendMsg > p{
+    font-size: 0.9em;
+    color: white;
+    border-radius: 30%;
+    display: inline-block;
+    background-color: rgb(59, 59, 223);
+}
+.receiveMsg > p{
+    font-size: 0.9em;
+    color: black;
+    border-radius: 30%;
+    display: inline-block;
+    background-color: rgb(226, 225, 225);
+}

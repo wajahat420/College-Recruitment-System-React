@@ -9,9 +9,11 @@
 .msgWindow header:hover{
     cursor: pointer;
 }
-.msgWindow div{
-    background-color: rgb(236, 207, 212);
-    height: 225px;
+.msgWindow >  div{
+    background-color: white;
+    height: 232px;
+    overflow-y: scroll;
+
 }
 .fa-arrow-right{
     /* background-color: blue; */

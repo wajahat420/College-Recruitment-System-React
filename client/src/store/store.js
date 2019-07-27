@@ -29,7 +29,7 @@ const reducer = (state = {
                 ...state,
                 openMsgWindow : action.openMsgWindow
             };
-            console.log("openMsgWindow",state.openMsgWindow)
+            // console.log("openMsgWindow",state.openMsgWindow)
             break;  
         case 'REMOVE_NAME_FROM_MSG_TITLES':
             const duplicate = [...state.msgBoxTitles]
@@ -38,15 +38,29 @@ const reducer = (state = {
                 ...state,
                 msgBoxTitles : duplicate
             };
-            console.log("removing msgBox",state.msgBoxTitles)
+            // console.log("removing msgBox",state.msgBoxTitles)
             break;
         case 'SET_SIGNIN':
-            
             state = {
                 ...state,
                 signin : action.signin
             };
+            console.log("signin",state.signin)
             break; 
+        case 'SET_RECEIVER':
+            state = {
+                ...state,
+                receiver : action.receiver
+            };
+            console.log("receiver",action.receiver)
+        break; 
+        case 'SEND_MSG':
+            state = {
+                ...state,
+                messages : [...state.messages,{sender:state.signin,receiver : state.receiver,msg:action.msg}]
+            };
+            console.log("messages",state.messages)
+        break; 
      
         default :
                return state 

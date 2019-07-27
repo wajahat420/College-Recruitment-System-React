@@ -9,11 +9,12 @@ import MsgWindow from "./msgWindow"
         nameHover : "",
         titleClick : "",
         top : 335,
+        msg : "",
         mouseLeave : false,
         click : false
     }
 
-    closeChat = (index,elem) => {
+    closeChat = (index) => {
         // console.log("in close chat func",elem)
         this.props.removeNameFromMsgTitles(index)
         this.setState({nameHover : ""},()=>{
@@ -24,7 +25,7 @@ import MsgWindow from "./msgWindow"
     titleClick = (elem) => {
         // console.log("in title click func titleClick",this.state.titleClick,"elem",elem)
         if(elem !== this.state.titleClick){
-            // console.log("if")
+            this.props.setReceiver(elem)
             this.setState({titleClick : elem})
         }
         else{
@@ -32,9 +33,22 @@ import MsgWindow from "./msgWindow"
             this.setState({titleClick : ""})
         }   
     }
+
+    sendMsg = () => {
+        
+        const {receiver,signin} = this.props
+        if( receiver !== "" && signin !== ""){
+            this.props.sendMsg(this.state.msg)
+            this.setState({msg : ""})
+        }
+        else{
+            // console.log("insisde elseeeee")
+            alert("Please Signin First")
+        }
+    }
     
     render() {
-        // console.log("titleClick",this.state.titleClick)
+        // console.log("msg",this.state.msg)
 
         return (
             <div  className=" col-md-9 msgBoxTitle position-fixed p-0 m-0">
@@ -70,11 +84,15 @@ import MsgWindow from "./msgWindow"
                                 // console.log("working",this.state.titleClick)
                                 // this.setState({top})
                                 showElem = <MsgWindow 
-                                                closeChat = {()=>this.setState({titleClick : "",nameHover:""})}
-                                                onClick = {this.state.mouseLeave === true && this.setState({titleClick : ""})}
-                                                onMouseOver = {() => this.setState({mouseLeave : false})}
-                                                onMouseLeave = {() => this.setState({mouseLeave : true})}
-                                                header={elem}/>
+                                            closeChat = {()=>this.setState({titleClick : "",nameHover:""})}
+                                            onClick = {this.state.mouseLeave === true && this.setState({titleClick : ""})}
+                                            onMouseOver = {() => this.setState({mouseLeave : false})}
+                                            onMouseLeave = {() => this.setState({mouseLeave : true})}
+                                            header={elem}
+                                            sendMsg = {this.sendMsg}
+                                            textValue = {this.state.msg}
+                                            onChangeText = {(e) => this.setState({msg : e.target.value})}
+                                            />
                                 // showElem = <p className="col-md-12   p-2 h6 p-0" >Clicked</p>
                             }
                             return(
@@ -93,6 +111,8 @@ import MsgWindow from "./msgWindow"
 // className={(this.state.titleClick === elem ? " " : "d-none ") + "col-md-12 p-0" }
 const mapStateToProps = (state) => {
     return {
+        receiver : state.receiver,
+        signin : state.signin,
         msgBoxTitles : state.msgBoxTitles
     }
 };
@@ -110,7 +130,19 @@ const mapDispatchToProps = (dispatch) => {
                 type : "REMOVE_NAME_FROM_MSG_TITLES",
                 elemIndex : elemRemove
             })
-        }   
+        },
+        setReceiver : (receiver) => {
+            dispatch({
+                type : "SET_RECEIVER",
+                receiver
+            })
+        },
+        sendMsg : (msg) => {
+            dispatch({
+                type : "SEND_MSG",
+                msg
+            })
+        }
     }
 }
 
