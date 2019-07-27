@@ -1,5 +1,5 @@
 import React from "react"
-import SideBar from "./sideBar"
+// import SideBar from "./sideBar"
 import {connect} from "react-redux";
 
 class Main extends React.Component{

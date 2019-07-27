@@ -5,8 +5,9 @@ import {connect} from "react-redux";
 class SideBar extends React.Component{
     
     onClick = (receiver) => {
+        // this.props.titleClick()
         let valid = true
-        this.props.setReceiver(receiver)    
+        // this.props.setReceiver(receiver)    
         this.props.msgBoxTitlesArr.forEach(elem => {
 
             if(elem === receiver){
@@ -28,7 +29,7 @@ class SideBar extends React.Component{
     render(){
         
         return(
-        <div className="sidebar text-center position-absolute   col-md-3 p-0">
+        <div className="sidebar text-center position-absolute  col-md-3 p-0">
             
             {this.props.users.map((elem,index)=>{
                 return(
@@ -53,7 +54,9 @@ class SideBar extends React.Component{
 
 const mapStateToProps = (state) => {
     return {
-        msgBoxTitlesArr : state.msgBoxTitles
+        users : state.users,
+        msgBoxTitlesArr : state.msgBoxTitles,
+        getSignin : state.signin
     }
 };
 
@@ -64,6 +67,13 @@ const mapDispatchToProps = (dispatch) => {
                 type : "MSG_BOX_TITLES",
                 msgBoxTitles : arr
             }) 
+        },
+        setSignin : (elem) => {
+            dispatch({
+                type : "SET_SIGNIN",
+                signin : elem
+            })
+
         }
     }
 }

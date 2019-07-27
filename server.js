@@ -1,36 +1,44 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser")
+// const fs = require("fs")
 
-const users = require("./Routes/api/users")
-const profile = require("./Routes/api/profile")
-const posts = require("./Routes/api/posts")
-const insert = require("./Routes/api/insertItem")
-const fetchingItems = require("./Routes/api/fetchingItems")
+// const cloudinary = require("cloudinary").v2
+// cloudinary.config({ 
+//     cloud_name: 'deaz1bojg', 
+//     api_key: '645723722777177', 
+//     api_secret: 'XRGgePHQU2pAdluBm1nDxjCQ3_c' 
+// });
+
+
+// const index = require("./Routes/index")
+// app.use("/",index)
+
 
 const app = express()
+const mongoURI = "mongodb://localhost/College-Recruitment-Sysytems"
 
-
-//BodyParser
 app.use(bodyParser.urlencoded({extended : false}))
 app.use(bodyParser.json())
 
-// config
-// const  db = require("./config/keys").mongoURI
 
-mongoose.connect("mongodb://localhost/dataa",{ useNewUrlParser: true })
+
+mongoose.connect(mongoURI,{ useNewUrlParser: true })
 .then( () => console.log("successfully connected to mongoDB") )
 .catch( (err) => console.log("err",err) )
 
 
 
-app.get("/", (req,res) => res.send("hello"));
+app.get("/", (req,res) =>{
+    res.send("working server");
 
-app.use("/",fetchingItems)
-app.use("/api/insert",insert)
-app.use("/api/users",users);
-app.use("/api/posts",posts)
-app.use("/api/profile",profile)
+})  
+app.get("/getImages",(req,res)=> {
+  cloudinary.api.resources((error,result) => {
+    res.send( result.resources)
+  })
+})
+
 
 const port = process.env.PORT || 5000
 

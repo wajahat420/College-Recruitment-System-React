@@ -4,7 +4,7 @@ import React, { Component } from 'react'
 export default class OutputPosts extends Component {
     render() {
         return (
-            <div className="float-left  col-md-9 m-0 pt-4 pb-4">
+            <div className="float-left clearfix col-md-9 m-0 pt-4 pb-4">
                 <div className="col-md-7 m-auto p-0">
                     <h2 className="">Username</h2>
                     <div>{this.props.postText}</div>

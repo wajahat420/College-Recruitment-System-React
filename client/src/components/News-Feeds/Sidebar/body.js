@@ -7,8 +7,7 @@ class Body extends React.Component{
         text : ""
     }
 
-
-
+    
     render(){
         // console.log("text",this.state.text)
         return(

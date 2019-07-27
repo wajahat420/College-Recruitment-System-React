@@ -1,5 +1,8 @@
 const reducer = (state = {
+    receiver : "",
+    signin : "",
     imageURL : "",
+    messages : [],
     AllPosts : [],
     msgBoxTitles : [],
     users : ["hamza","wajahat","aun","atif","haider"],
@@ -12,7 +15,7 @@ const reducer = (state = {
                 ...state,
                 AllPosts : [...state.AllPosts,{postText:action.postText,imageURL:action.imageURL,key:parseInt(Math.random()*100000)}]
             };
-            console.log("All Posts",state.AllPosts)
+            // console.log("All Posts",state.AllPosts)
             break;
         case 'MSG_BOX_TITLES':
             state = {
@@ -36,6 +39,13 @@ const reducer = (state = {
                 msgBoxTitles : duplicate
             };
             console.log("removing msgBox",state.msgBoxTitles)
+            break;
+        case 'SET_SIGNIN':
+            
+            state = {
+                ...state,
+                signin : action.signin
+            };
             break; 
      
         default :
