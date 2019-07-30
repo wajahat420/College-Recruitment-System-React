@@ -1,0 +1,14 @@
+/* .infoBox .img:hover{
+    background-color: white;
+}
+.infoBox .img > img:hover{
+    background-color: white;
+} */
+.infoBox .footer > div > small{
+    color: blue;
+    cursor: pointer;
+
+}
+.infoBox .footer > div > small:hover{
+    color: rgb(49, 4, 107)
+}
