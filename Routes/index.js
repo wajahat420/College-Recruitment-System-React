@@ -1,10 +1,12 @@
 const express = require("express")
 const router = express.Router()
-
+// const gravatar = require("gravatar")
+// const bcrypt = require("bcryptjs")
+// load User Model
 const User = require("../models/Users")
 const confirmBuying = require("../models/confirmBuying")
 const UploadImagesData = require("../models/UploadImagesData")
-const fs = require("fs")
+// const fs = require("fs")
 
 const cloudinary = require("cloudinary").v2
 cloudinary.config({ 
@@ -18,6 +20,24 @@ router.use("/test",(req,res) =>
     msg : "user works"
 })) 
 
+
+router.use("/studentDataUpload",(req,res)=>{
+    console.log("studentDataUpload req")
+    cloudinary.uploader.upload(
+        "data:text/plain;base64,ZGVtbw=="
+        ,{
+            // tags: 'basic_sample',
+            public_id : "123456",
+            resource_type : "auto"  ,
+            folder : "College_Recruitment/Student's_Data/"
+             
+        },
+         function (err, result){
+            console.log("result",result)
+            console.log("err",err)
+      
+    })
+})
 
 // register user
 router.post("/register",(req,res)=>{
@@ -91,7 +111,7 @@ router.use("/confirmBuying",(req,res) => {
 })
 
 router.post("/upload",(req,res)=> {
-    console.log("in req")
+    // console.log("in req")
     // base64
     var newImgData;
     cloudinary.uploader.upload(req.body.imageURL,{ tags: 'basic_sample' }, function (err, result){
@@ -126,6 +146,8 @@ router.post("/upload",(req,res)=> {
   
 })
 router.get("/getImages",(req,res)=>{
+    console.log("worksssssssssssssss")
+    
     cloudinary.api.resources((error,result) => {
         const arr = []
         UploadImagesData.find().cursor().eachAsync(async (model) => {
@@ -140,35 +162,12 @@ router.get("/getImages",(req,res)=>{
          })
     })
 })
-router.get("/getImagesData",(req,res)=> {
-    const arr = []
-    UploadImagesData.find().cursor().eachAsync(async (model) => {
-        console.log('images', model.nameOfItem);
-     });
-})
+// router.get("/getImagesData",(req,res)=> {
+//     const arr = []
+//     UploadImagesData.find().cursor().eachAsync(async (model) => {
+//         console.log('images', model.nameOfItem);
+//      });
+// })
 
-function lzw_decode(s) {
-    var dict = {};
-    var data = (s + "").split("");
-    var currChar = data[0];
-    var oldPhrase = currChar;
-    var out = [currChar];
-    var code = 256;
-    var phrase;
-    for (var i=1; i<data.length; i++) {
-        var currCode = data[i].charCodeAt(0);
-        if (currCode < 256) {
-            phrase = data[i];
-        }
-        else {
-           phrase = dict[currCode] ? dict[currCode] : (oldPhrase + currChar);
-        }
-        out.push(phrase);
-        currChar = phrase.charAt(0);
-        dict[code] = oldPhrase + currChar;
-        code++;
-        oldPhrase = phrase;
-    }
-    return out.join("");
-}
+
 module.exports = router

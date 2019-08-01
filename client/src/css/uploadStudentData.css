@@ -1,0 +1,28 @@
+.uploadStudent{
+    border-radius: 10%;
+    background-color: rgb(204, 202, 202)
+}
+
+.uploadStudent p{
+    /* line-height: 2em; */
+    /* min-width: 100%; */
+    border-bottom: 2px solid black;
+    overflow: hidden;
+    font-weight: 550;
+    color: blue;
+    
+}
+.uploadStudent td{
+    padding: 1.4%;
+}
+.uploadStudent label {
+    font-size: 1.3em;
+    font-weight: 550;
+    color: rgb(161, 22, 22);
+}
+.uploadStudent input[type="text"],.uploadStudent input[type="number"]{
+    font-size: 1.1em;
+    border-radius: 30%;
+    outline: 0px;
+    border: 0px;
+}

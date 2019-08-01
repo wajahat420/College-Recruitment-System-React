@@ -17,7 +17,7 @@ export default class AllBoxes extends Component {
             this.state.names.map((elem,index)=>{
                 return (
                     // <div className="col-md-12 p-0">
-                        <div className="col-md-3  float-left p-2">
+                        <div key={index} className="col-md-3  float-left p-2">
                             <InfoBoxes
                                 cgpa={this.state.cgpa[index]}
                                 img ={IMG}
