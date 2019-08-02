@@ -33,15 +33,16 @@ class SideBar extends React.Component{
             
             {this.props.users.map((elem,index)=>{
                 return(
-                    <div className={(this.props.getReceiver === elem ? "receiver " : "") + "p-2"  }
-                         onDoubleClick={() => this.props.setSignin(elem)}
-                         onClick={() => this.onClick(elem)} key={index}
+                    <div className={(this.props.getReceiver === elem.name ? "receiver " : "") + "p-2"  }
+                         onDoubleClick={() => this.props.setSignin(index)}
+                         onClick={() => this.onClick(elem.name)} 
+                         key={index}
                      >
-                        <small className={(this.props.getSignin === elem ? "" : " displayNone ") + "text-left  float-left  col-md-2 p-0"} >
+                        <small className={(this.props.getSignin === elem.name ? "" : " displayNone ") + "text-left  float-left  col-md-2 p-0"} >
                             *
                         </small>
                         <div className="col-md-10 p-0 ">
-                            {elem}
+                            {elem.name}
                         </div>
                      </div>
                 )
@@ -68,10 +69,10 @@ const mapDispatchToProps = (dispatch) => {
                 msgBoxTitles : arr
             }) 
         },
-        setSignin : (elem) => {
+        setSignin : (index) => {
             dispatch({
                 type : "SET_SIGNIN",
-                signin : elem
+                signin : index
             })
 
         }

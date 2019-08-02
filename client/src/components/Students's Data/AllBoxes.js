@@ -1,32 +1,72 @@
-// import React from 'react'
-import InfoBoxes from "./infoBox"
+import React, { Component } from 'react'
+import {connect} from "react-redux"
 
+import InfoBoxes from "./infoBox"
 import IMG from "../../images/1.jpg"
 
-import React, { Component } from 'react'
 
-export default class AllBoxes extends Component {
 
-    state ={
-        names : ["Hamza","Wajahat","Ali","Atif","Aun","Haider"],
-        cgpa : [1.2,3.4,2.5,2.9,1.6]
+ class AllBoxes extends Component {
+
+    filterArray = (usersObj) => {
+        const {signin,searchText,sortBy} = this.props
+
+        if(searchText !== ""){
+            if(sortBy === "name"){
+                return  usersObj.name.toLowerCase().includes(searchText.toLowerCase())
+            }
+            return usersObj.cgpa.includes(searchText)
+        }
+        else if(signin.as === "university"){
+            // this.setState({studentSignin : false})
+            return true
+        }
+        else if(signin.name === usersObj.name){
+            // this.setState({studentSignin : true})
+            return true
+        }
+        // this.setState({studentSignin : false})
+        return false
+        
     }
 
     render() {
+        // console.log("inrender")
         return (
-            this.state.names.map((elem,index)=>{
-                return (
-                    // <div className="col-md-12 p-0">
-                        <div key={index} className="col-md-3  float-left p-2">
-                            <InfoBoxes
-                                cgpa={this.state.cgpa[index]}
-                                img ={IMG}
-                                name={elem}/>
-                        </div>
-                    // </div>
-                )
-            })
+            <div className="col-md-12 text-center p-0">
+                {
+                    this.props.users.filter((obj) => this.filterArray(obj)).map((elem,index)=>{
+                        return (
+                                <div 
+                                key={index} 
+                                className={ (this.props.signin.as === "student" ? "col-md-5" : "col-md-3") +"  m-auto d-inline-block p-2"}>
+                                    <InfoBoxes
+                                        cgpa={elem.cgpa}
+                                        img ={IMG}
+                                        name={elem.name}
+                                        description ={elem.description}
+                                        />
+                                </div>
+                        )
+                    })
+                }
+            </div>
         )
+    }
+} 
+
+const mapStateToProps = (state) => {
+    return{
+        users : state.users,
+        signin : state.signin,
+        searchText : state.searchText,
+        sortBy : state.sortBy
+    }
+}
+const mapDispatchToProps = (dispatch) => {
+    return{
+
     }
 }
 
+export  default connect(mapStateToProps,mapDispatchToProps)(AllBoxes)

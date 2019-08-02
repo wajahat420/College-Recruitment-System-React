@@ -16,9 +16,9 @@ class infoBox extends React.Component {
                             className="text-center mb-0   p-0">{this.props.name}</p>
                         <p style={{backgroundColor:"gray",color:"white",borderBottom:"1px solid black"}}
                             className="text-center mb-0  p-0">CGPA : {this.props.cgpa}</p>
-                        <small className="p-0">Description about you if you want to say about yourself for more info..</small>
+                        <small className="p-0">{this.props.description}</small>
                         <div className="row col-md-12 ml-0 p-0 mt-1 footer">
-                            <div className="col-md-6 p-0">
+                            <div className="col-md-6 text-left p-0">
                                 <a href="#" className=" d-inline-block  p-0  ">Marksheet</a>
                             </div>
                             <div className="col-md-6 p-0 text-right">

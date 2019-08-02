@@ -1,21 +1,32 @@
 import React, { Component } from 'react'
 import AllBoxes from "./AllBoxes"
 import UploadStudentData from "./uploadStudentData"
-import axios from "axios"
+import SearchBar from "./searchBar"
+import {connect} from "react-redux"
 
-export default class main extends Component {
-    constructor(){
-        super()
-        // axios.get("/studentDataUpload")
-        // .then(res=> console.log("successfully uploaded "))
-        // .catch(err=>console.log("error",err))
-    }
+class Main extends Component {
+   
     render() {
         return (
             <div>
-                <UploadStudentData/>
-                <AllBoxes/>
+                <div className={(this.props.signin.as === "student" || this.props.signin === "") ? "d-none":""}>
+                    <SearchBar/>
+                </div>
+                <div className={(this.props.signin.as !== "student" || this.props.signin === "") ? "d-none":""}>
+                    <UploadStudentData/>
+                </div>
+                <div>
+                    <AllBoxes/>
+                </div>
             </div>
         )
     }
 }
+const mapStateToProps = (state) => {
+    return{
+        signin : state.signin
+    }
+}
+
+
+export default connect(mapStateToProps)(Main)

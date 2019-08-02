@@ -1,12 +1,20 @@
 const reducer = (state = {
     receiver : "",
-    signin : "",
+    signin : {name : "Wajahat",cgpa : "3.4",as:"university",description : "I am university student",cv: "",resume : "",img:""},
     imageURL : "",
     messages : [],
     AllPosts : [],
     msgBoxTitles : [],
-    users : ["hamza","wajahat","aun","atif","haider"],
-    openMsgWindow : ""
+    openMsgWindow : "",
+    searchText : "",
+    sortBy : "name",
+    users : [
+        {name : "Wajahat",cgpa : "3.4",as:"university",description : "I am university student",cv: "",resume : "",img:""},
+        {name : "Aun",cgpa : "1.2",as:"student",description : "I am university student",cv: "",resume : "",img:""},
+        {name : "Atif",cgpa : "2.4",as:"student",description : "I am university student",cv: "",resume : "",img:""},
+        {name : "Hamza",cgpa : "3.6",as:"student",description : "I am university student",cv: "",resume : "",img:""},
+        {name : "Zafar",cgpa : "1.1",as:"student",description : "I am university student",cv: "",resume : "",img:""}
+    ]
 
 }, action) => {
     switch (action.type) {
@@ -43,7 +51,7 @@ const reducer = (state = {
         case 'SET_SIGNIN':
             state = {
                 ...state,
-                signin : action.signin
+                signin : state.users[action.signin]
             };
             console.log("signin",state.signin)
             break; 
@@ -52,15 +60,29 @@ const reducer = (state = {
                 ...state,
                 receiver : action.receiver
             };
-            console.log("receiver",action.receiver)
+            // console.log("receiver",action.receiver)
         break; 
         case 'SEND_MSG':
             state = {
                 ...state,
                 messages : [...state.messages,{sender:state.signin,receiver : state.receiver,msg:action.msg}]
             };
-            console.log("messages",state.messages)
-        break; 
+            // console.log("messages",state.messages)
+        break;
+        case "SEARCH_TEXT":
+            state ={
+                ...state,
+                searchText : action.searchText
+            }
+            // console.log("search text",state.searchText)
+        break
+        case "SORT_BY" :
+            state = {
+                ...state,
+                sortBy : action.sortBy
+            }
+            // console.log("sortBY",state.sortBy)
+        break
      
         default :
                return state 
