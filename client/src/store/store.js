@@ -1,7 +1,9 @@
+
 const reducer = (state = {
     receiver : "",
     signin : {name : "Wajahat",cgpa : "3.4",as:"university",description : "I am university student",cv: "",resume : "",img:""},
     imageURL : "",
+    students : [],
     messages : [],
     AllPosts : [],
     msgBoxTitles : [],
@@ -48,12 +50,12 @@ const reducer = (state = {
             };
             // console.log("removing msgBox",state.msgBoxTitles)
             break;
-        case 'SET_SIGNIN':
+        case 'SIGNIN':
             state = {
                 ...state,
-                signin : state.users[action.signin]
+                signin : action.signin
             };
-            console.log("signin",state.signin)
+            // console.log("signin",state.signin)
             break; 
         case 'SET_RECEIVER':
             state = {
@@ -82,6 +84,13 @@ const reducer = (state = {
                 sortBy : action.sortBy
             }
             // console.log("sortBY",state.sortBy)
+        break
+        case "STUDENTS":
+            state ={
+                ...state,
+                students : action.students
+            }
+            // console.log("students",state.students)
         break
      
         default :

@@ -1,5 +1,4 @@
 .Signup{
-    min-width: 760px;
     padding: 5px;
     background: url(../images/b2.jpg);
     background-attachment: fixed;
@@ -7,52 +6,35 @@
     height: 770px;
     text-align: center;
 }
-/* body{
-    padding: 0px;
-    margin: 0px;
-    font-family: 'Barlow', sans-serif;
-} */
+
 .Signup h1{
     font-weight: 100;
     word-spacing: 10px;
-    margin-top: 0px;
     letter-spacing: 3px;
     word-spacing: 5px; 
     font-size: 3.7em;
     color: white;
 }
 
- .form{
-    padding: 5px 20px;
-    padding-bottom: 50px !important;
-    background-color: rgba(0, 0, 0, 0.637);
-    width: 50%;
-    margin: auto;
-}
-.Signup input{
-    text-align: center;
-    margin-top: 20px !important;
-    /* height: 40px; */
-    margin: 2%;
-    width: 90%;
+.Signup .radios {
     font-size: 1.2em;
-    padding: 2%;
+    color: white;
+}
+.Signup .div{
+    color: rgb(202, 202, 240);
 }
 .Signup input[type="submit"]{
     color : white ;
-    background-color: rgb(103, 103, 233)  !important;
+    background-color: rgb(103, 103, 233)  ;
     outline: 0px;
     border: 0px;
-}
+} 
 .Signup input::placeholder{
-    text-align: center;
-    color: rgba(0, 0, 0, 0.603) ;
-
+    /* text-align: center; */
+    color: rgba(0, 0, 0, 0.397) ;
 }
-/* .address{
-    width: 84%;
-} */
-@media(max-width: 1150px){
+
+/* @media(max-width: 1150px){
     .form{
         width: 60%;
     }
@@ -68,4 +50,4 @@
     h2{
         font-size: 2.4em;
     }
-}
+} */

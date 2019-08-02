@@ -1,8 +1,22 @@
 import React from "react"
 import "../../../css/sidebar.css"
 import {connect} from "react-redux";
+import axios from "axios"
 
 class SideBar extends React.Component{
+
+    constructor(){
+        super()
+        axios.get("/fetchStudentsFromDB")
+        .then(res=>{
+            this.props.setStudents(res.data)
+            console.log("res.data",res.data)
+        })
+    }
+
+    // componentDidMount(){
+    //     console.log("componentDidMount")
+    // }
     
     onClick = (receiver) => {
         // this.props.titleClick()
@@ -31,18 +45,17 @@ class SideBar extends React.Component{
         return(
         <div className="sidebar text-center position-absolute  col-md-3 p-0">
             
-            {this.props.users.map((elem,index)=>{
+            {this.props.students.map((elem,index)=>{
                 return(
-                    <div className={(this.props.getReceiver === elem.name ? "receiver " : "") + "p-2"  }
-                         onDoubleClick={() => this.props.setSignin(index)}
-                         onClick={() => this.onClick(elem.name)} 
+                    <div className={(this.props.getReceiver === elem.firstName ? "receiver " : "") + "p-2"  }
+                         onClick={() => this.onClick(elem.firstName)} 
                          key={index}
                      >
-                        <small className={(this.props.getSignin === elem.name ? "" : " displayNone ") + "text-left  float-left  col-md-2 p-0"} >
+                        <small className={(this.props.getSignin === elem.firstName ? "" : " displayNone ") + "text-left  float-left  col-md-2 p-0"} >
                             *
                         </small>
                         <div className="col-md-10 p-0 ">
-                            {elem.name}
+                            {elem.firstName}
                         </div>
                      </div>
                 )
@@ -55,7 +68,7 @@ class SideBar extends React.Component{
 
 const mapStateToProps = (state) => {
     return {
-        users : state.users,
+        students : state.students,
         msgBoxTitlesArr : state.msgBoxTitles,
         getSignin : state.signin
     }
@@ -74,7 +87,12 @@ const mapDispatchToProps = (dispatch) => {
                 type : "SET_SIGNIN",
                 signin : index
             })
-
+        },
+        setStudents : (arr) =>{
+            dispatch({
+                type : "STUDENTS",
+                students : arr
+            })
         }
     }
 }

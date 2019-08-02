@@ -10,6 +10,7 @@ import IMG from "../../images/1.jpg"
 
     filterArray = (usersObj) => {
         const {signin,searchText,sortBy} = this.props
+        // console.log("signin",signin)
 
         if(searchText !== ""){
             if(sortBy === "name"){
@@ -21,7 +22,7 @@ import IMG from "../../images/1.jpg"
             // this.setState({studentSignin : false})
             return true
         }
-        else if(signin.name === usersObj.name){
+        else if(signin.firstName.toLowerCase() === usersObj.name.toLowerCase()){
             // this.setState({studentSignin : true})
             return true
         }

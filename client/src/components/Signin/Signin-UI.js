@@ -24,8 +24,8 @@ function Signin(props)
                                                 required={true} name="password"/>
                                         </div>
                                         <div className="bottom">
-                                            <input onChange={props.onSubmit}
-                                                 type="submit" value="Log in" />
+                                            <input onClick={ props.Submit}
+                                                 type="button" value="Log in" />
                                         </div>
                                         <p><span >Forgot Password?   <NavLink to="/Register">Register</NavLink> </span></p>
                                     </form>	

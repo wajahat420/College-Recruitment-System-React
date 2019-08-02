@@ -15,11 +15,6 @@ cloudinary.config({
     api_secret: 'XRGgePHQU2pAdluBm1nDxjCQ3_c' 
 });
 
-router.use("/test",(req,res) => 
-    res.json({
-    msg : "user works"
-})) 
-
 
 router.use("/studentDataUpload",(req,res)=>{
     console.log("studentDataUpload req")
@@ -39,26 +34,22 @@ router.use("/studentDataUpload",(req,res)=>{
     })
 })
 
-// register user
-router.post("/register",(req,res)=>{
+router.post("/signup",(req,res)=>{
  
-    // console.log("req.body.email",req.body.email)
     User.findOne({email : req.body.email })
         .then(user => {
             if(user){
-                // email = false
                 res.send(false)
                 console.log("signup failed user exists...")
             }else{
-                // email = true
                 res.send(true)
 
                 let newUser = new User({
-                    firstName : req.body.firstName,
-                    lastName : req.body.lastName,
-                    phone : req.body.phone,
+                    firstName : req.body.first_name,
+                    lastName : req.body.last_name,
+                    as : req.body.as,
                     email : req.body.email,
-                    password : req.body.password    
+                    password : req.body.password  
                 })
 
                 newUser.save()
@@ -68,47 +59,43 @@ router.post("/register",(req,res)=>{
         })
 })
 
-// User Login
-  
 router.post("/login",(req,res) => {
-    console.log("working login req")
+    // console.log("req.body",req.body)
+    // res.status(500).json({error : "error"})
     email  = req.body.email
     password = req.body.password
  
     User.findOne({email : email})
+
         .then( user => {
-            if(!user){
-                console.log("email address not found")
-                res.send(false)
-            }
-            if(password == user.password){
-                res.send(true)
+            console.log("user",user.email,user.password)
+            console.log("entered",email,password)
+            if(user && password == user.password){
+                res.json({
+                    valid : true,
+                    user
+                })
                 console.log("successful Signin")
             }
             else{
-                res.send(false)
-                console.log("password not found")
-                return res.status(404).json({password : "password incorrect"})
-
+                res.json({
+                    valid : false
+                })
             }
         })
 })
-
-// COnfirm Buying
-
-router.use("/confirmBuying",(req,res) => {
-
-
-    let newItem = new confirmBuying ({
-        User : req.body.userEmail,
-        BuyingList : req.body.buyingList ,
-        TotalPrice : req.body.totalPrice
-    })
-    console.log("newItem",newItem)
-    newItem.save()
-    .then(res => console.log("successfully inserted"))
-    .catch(err => console.log("error in insertion",err))
+router.get("/fetchStudentsFromDB",(req,res)=>{
+        const arr = []
+        User.find().cursor().eachAsync(async (model) => {
+            if(model.as === "student"){arr.push(model)}
+            console.log('model', model);
+         })
+         .then(() => {
+            res.send(arr)
+         })
+        //  console.log("end")
 })
+
 
 router.post("/upload",(req,res)=> {
     // console.log("in req")

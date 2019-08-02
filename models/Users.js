@@ -10,9 +10,8 @@ const UserSchema = new Schema({
         type : String,
         required : true
     },
-    phone : {
-        type : String,
-        required : true
+    as : {
+        type : String,  
     },
     email : {
         type : String,

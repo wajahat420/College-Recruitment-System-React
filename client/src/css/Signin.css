@@ -2,7 +2,7 @@
 img{max-width:100%;}
 /*-- end reset --*/
 .main-img {
-    height: 552px;
+    height: 610px;
     font-family: 'Muli', sans-serif;
     background: url(../images/1.jpg)no-repeat center 0px;
 	-webkit-background-size:cover;
@@ -100,7 +100,7 @@ img{max-width:100%;}
     text-align: center;
     letter-spacing: 2px;
 }
-.header-left-bottom input[type="submit"] {
+.header-left-bottom input[type="button"] {
     background: #3be8b0;
     color: #FFF;
     font-size: 17px;
