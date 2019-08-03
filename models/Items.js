@@ -3,11 +3,11 @@ const Schema = mongoose.Schema
 
 const UserSchema = new Schema({
 
-    nameOfItem : {
+    postId : {
         type : String,
         required : true
     },
-    priceOfItem : {
+    likeClick : {
         type : String,
         required : true
     }

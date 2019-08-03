@@ -4,7 +4,7 @@ const router = express.Router()
 // const bcrypt = require("bcryptjs")
 // load User Model
 const User = require("../models/Users")
-const confirmBuying = require("../models/confirmBuying")
+const Post = require("../models/Post")
 const UploadImagesData = require("../models/UploadImagesData")
 // const fs = require("fs")
 
@@ -16,23 +16,6 @@ cloudinary.config({
 });
 
 
-router.use("/studentDataUpload",(req,res)=>{
-    console.log("studentDataUpload req")
-    cloudinary.uploader.upload(
-        "data:text/plain;base64,ZGVtbw=="
-        ,{
-            // tags: 'basic_sample',
-            public_id : "123456",
-            resource_type : "auto"  ,
-            folder : "College_Recruitment/Student's_Data/"
-             
-        },
-         function (err, result){
-            console.log("result",result)
-            console.log("err",err)
-      
-    })
-})
 
 router.post("/signup",(req,res)=>{
  
@@ -88,12 +71,71 @@ router.get("/fetchStudentsFromDB",(req,res)=>{
         const arr = []
         User.find().cursor().eachAsync(async (model) => {
             if(model.as === "student"){arr.push(model)}
-            console.log('model', model);
+            // console.log('model', model);
          })
          .then(() => {
             res.send(arr)
          })
         //  console.log("end")
+})
+router.use("/studentDataUpload",(req,res)=>{
+    console.log("studentDataUpload req")
+    // cloudinary.uploader.upload(
+    //     "data:text/plain;base64,ZGVtbw=="
+    //     ,{
+    //         public_id : "123456",
+    //         resource_type : "auto"  ,
+    //         folder : "College_Recruitment/Student's_Data/"
+             
+    //     },
+    //      function (err, result){
+    //         console.log("result",result)
+    //         console.log("err",err)
+      
+    // })
+})
+router.post("/uploadPost",(req,res)=>{
+    let post = new Post({
+        postId : parseInt((Math.random() * 1000) + (Math.random() * 1000)),
+        name : req.body.fullName,
+        text : req.body.text,
+        img : req.body.imageURL,
+        likes : []
+    })
+    post.save()
+    .then(()=>{
+        console.log("Successfully uploaded post");
+        res.send(true)
+    })
+    
+    .catch(()=>console.log("Error in saving"))
+})
+router.get("/fetchAllPosts",(req,res)=>{
+    const arr = []
+    Post.find().cursor().eachAsync(async (post) => {
+        arr.push(post)
+     })
+     .then(() => {
+        res.send(arr)
+     })
+})
+router.post("/LikeClicked",(req,res)=>{
+    const email = req.body.email
+    const postId = req.body.postId
+
+    // console.log("email,postId",email,postId)
+    Post.findOneAndUpdate({$and : [{likes : {$nin : [email]}},{postId}]},
+        {$push :{likes : email}},{new:true},
+        (err,result)=>{
+            if(result !== null){
+                console.log("result",result.likes)
+            }else{
+                Post.updateOne({postId},{$pull : {likes : {$in : [email]}}})
+                .then(res => console.log("deleted",res))
+                // console.log("already liked this post")
+            }
+        }
+    )
 })
 
 

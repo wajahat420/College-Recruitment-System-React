@@ -1,9 +1,19 @@
 import React, { Component } from 'react'
 import "../../../css/Posts.css"
 import {connect} from "react-redux";
+import axios from 'axios';
 
 
 class Posts extends Component {
+
+    constructor(){
+        super()
+        axios.get("/fetchAllPosts")
+        .then(res=>{
+            this.props.postAllPosts(res.data)
+        })
+        .catch(err=>alert("error "+err))
+    }
 
     state = {
         text : "",
@@ -41,9 +51,22 @@ class Posts extends Component {
     }
 
     post = () => {
+        const{text,imageURL} = this.state
+        const {signin} = this.props
         // console.log("state",this.state)
-        this.props.postInput(this.state.text,this.state.imageURL)
-        this.setState({showImg : false,text:"",imageURL : ""})
+        if((text ||   imageURL) && signin !== ""){
+            axios.post("/uploadPost",{
+                fullName : signin.firstName + " " + signin.lastName,
+                text,
+                imageURL
+            })
+            .then(()=>{
+                console.log("inside then")
+                this.props.postInput(text,imageURL)
+                this.setState({showImg : false,text:"",imageURL : ""})
+            })
+            .catch(err=>alert("error " + err))
+        }
     }
 
     render() {
@@ -93,7 +116,8 @@ class Posts extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        userLogin : state.userLogin
+        userLogin : state.userLogin,
+        signin : state.signin
     }
 };
 
@@ -105,6 +129,12 @@ const mapDispatchToProps = (dispatch) => {
                 postText : text ,
                 imageURL : URL,
             }) 
+        },
+        postAllPosts : (posts) =>{
+            dispatch({
+                type : "ALL_POSTS",
+                allPosts : posts
+            })
         }
     }
 }

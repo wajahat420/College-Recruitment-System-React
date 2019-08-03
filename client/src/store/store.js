@@ -1,7 +1,7 @@
 
 const reducer = (state = {
     receiver : "",
-    signin : {name : "Wajahat",cgpa : "3.4",as:"university",description : "I am university student",cv: "",resume : "",img:""},
+    signin : "",
     imageURL : "",
     students : [],
     messages : [],
@@ -23,7 +23,12 @@ const reducer = (state = {
         case 'INSERT_POST':
             state = {
                 ...state,
-                AllPosts : [...state.AllPosts,{postText:action.postText,imageURL:action.imageURL,key:parseInt(Math.random()*100000)}]
+                AllPosts : [...state.AllPosts,{
+                    text:action.postText,
+                    img:action.imageURL,
+                    name : state.signin.firstName + " " + state.signin.lastName,
+                    likes : []
+                }]
             };
             // console.log("All Posts",state.AllPosts)
             break;
@@ -92,7 +97,24 @@ const reducer = (state = {
             }
             // console.log("students",state.students)
         break
-     
+        case "ALL_POSTS":
+            state ={
+                ...state,
+                AllPosts : action.allPosts
+            }
+        break
+        case "LIKE":
+            // console.log("AllPosts",state.AllPosts[action.index].like)
+            let tempArr = [...state.AllPosts]
+            let likeValue = tempArr[action.index].like
+            tempArr[action.index].like = !likeValue
+            state ={
+                ...state,
+                AllPosts : tempArr
+            }
+            // console.log("AllPosts",state.AllPosts[action.index].like)
+            // return state
+        break
         default :
                return state 
 

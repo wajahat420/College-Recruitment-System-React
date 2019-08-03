@@ -10,8 +10,11 @@ class SideBar extends React.Component{
         axios.get("/fetchStudentsFromDB")
         .then(res=>{
             this.props.setStudents(res.data)
-            console.log("res.data",res.data)
+            // console.log("res.data",res.data)
         })
+        .catch(err => alert("error "+err))
+
+
     }
 
     // componentDidMount(){
