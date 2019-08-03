@@ -72,10 +72,10 @@ class Posts extends Component {
     render() {
 
         return (
-            <div className=" float-left col-md-9 p-0 ">
+            <div className={(this.props.signin.as === "student"? "d-none":"" )+" float-left col-9  p-0 "}>
                 <div className="Posts">
-                    <div className="create-post m-auto col-md-7 ">Create Post</div>
-                    <div className="  col-md-7 m-auto p-0">
+                    <div className="create-post m-auto col-sm-10 col-md-7 ">Create Post</div>
+                    <div className="  col-sm-10 col-md-7 m-auto p-0">
                         <textarea className="col-md-12 p-3 m-0 h-7"
                           placeholder="What's in your mind?"
                           onChange={(event)=> this.setState({text : event.target.value})}
@@ -84,7 +84,7 @@ class Posts extends Component {
                     <div className={this.state.showImg ? "col-md-4 m-auto p-0 pb-2 " : "d-none" }>
                         <img height="150px" width="100%"  alt="not found" src={this.state.imageURL} />
                     </div>
-                    <div className="image row m-auto p-2  col-md-7">
+                    <div className="image row m-auto p-2  col-sm-10 col-md-7">
                         <div className="col-md-9">
                             <label htmlFor="photo" className="p-2 m-0">
                                 Image

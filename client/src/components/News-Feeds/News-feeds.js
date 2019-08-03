@@ -5,21 +5,16 @@ import SideBar from "./Sidebar/sideBar"
 import MsgBoxTitle from "./Msg/MsgBoxTitle"
 // import 
 
+import "../../css/sidebar.css"
+
 export default class News_feeds extends Component {
     render() {
         return (
-            <div>
+            <div className="min-width">
                 <InputPosts />
                 <AllPosts/>
                 <MsgBoxTitle/>
-                <SideBar 
-                    // users={this.props.users}
-                    // setSignin={(elem) => this.setState({signin : elem})}
-                    // getSignin={this.state.signin}
-                    // setReceiver={(elem) => this.setState({receiver : elem})}
-                    // getReceiver = {this.state.receiver}
-                    />
-                {/* <Posts /> */}
+                <SideBar/>
 
             </div>
 

@@ -4,19 +4,16 @@
     cursor: pointer;
     color: black;   
     background-color: rgb(230, 223, 223);
-    /* top: 550px; */
 }
 .msgBoxTitle .visibility{
     visibility: hidden;
 }
 .msgBoxTitle .cross{
-    /* font-size: 1.2em;  */
     color: rgba(128, 124, 124, 0.767);
-    /* background-color: red; */
+
 }
 .msgBoxTitle .cross:hover{
     color: rgba(0, 0, 0, 0.726);
-    /* background-color: rgb(202, 199, 199); */
 }
 .msgBoxTitle .title{
     top:  517px;

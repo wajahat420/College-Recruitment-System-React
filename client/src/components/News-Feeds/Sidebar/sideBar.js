@@ -17,14 +17,8 @@ class SideBar extends React.Component{
 
     }
 
-    // componentDidMount(){
-    //     console.log("componentDidMount")
-    // }
-    
     onClick = (receiver) => {
-        // this.props.titleClick()
         let valid = true
-        // this.props.setReceiver(receiver)    
         this.props.msgBoxTitlesArr.forEach(elem => {
 
             if(elem === receiver){
@@ -46,7 +40,7 @@ class SideBar extends React.Component{
     render(){
         
         return(
-        <div className="sidebar text-center position-absolute  col-md-3 p-0">
+        <div className={(this.props.signin.as==="student"?"d-none":"")+" sidebar text-center position-fixed  col-3 p-0"}>
             
             {this.props.students.map((elem,index)=>{
                 return(
@@ -54,10 +48,7 @@ class SideBar extends React.Component{
                          onClick={() => this.onClick(elem.firstName)} 
                          key={index}
                      >
-                        <small className={(this.props.getSignin === elem.firstName ? "" : " displayNone ") + "text-left  float-left  col-md-2 p-0"} >
-                            *
-                        </small>
-                        <div className="col-md-10 p-0 ">
+                        <div className="col-12 p-0 ">
                             {elem.firstName}
                         </div>
                      </div>
@@ -71,6 +62,7 @@ class SideBar extends React.Component{
 
 const mapStateToProps = (state) => {
     return {
+        signin : state.signin,
         students : state.students,
         msgBoxTitlesArr : state.msgBoxTitles,
         getSignin : state.signin

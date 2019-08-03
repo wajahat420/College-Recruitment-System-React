@@ -1,7 +1,7 @@
 .msgWindow{
     border: 1px solid rgb(202, 200, 200);
     position: absolute;
-    top: 249px;
+    top: 305px;
 }
 .msgWindow header{
     background-color: rgb(228, 221, 221)

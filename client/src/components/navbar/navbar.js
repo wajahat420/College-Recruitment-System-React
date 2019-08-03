@@ -7,7 +7,7 @@ import {connect} from "react-redux"
     render(){
 
             return (
-                <nav className={(this.props.signin === "" ? "d-none":"")+" navbar navbar-default"}>
+                <nav className={(this.props.signin === "" ? "d-none":"")+" navbar    navbar-default"}>
                     <div className="container-fluid">
                         <div className="navbar-header">
                             <NavLink exact to="/" className="navbar-brand ">Recruitment System</NavLink>
