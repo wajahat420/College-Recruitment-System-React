@@ -6,22 +6,62 @@ export default class uploadStudentData extends Component {
         marksheetName : "",
         cvName : "",
         name : "",
-        cgpa : ""
+        cgpa : "",
+        marksheet :"",
+        cv: "",
+        image : "",
+        uploaded : ""
     }
 
     Submit = () => {
-        console.log("state",this.state)
+        const {cv,marksheet,name,cgpa,image} = this.state
+        if(cv && marksheet && name && cgpa && image){
+            console.log("All True")
+        }
     }
+    file = (event) =>  {
+        // console.log("working",event.target.name)
+        const name = event.target.name
+        const input = event.target;
+        const fileName = event.target.files[0].name
+
+        const reader = new FileReader();
+        reader.onload = () => {
+
+            const dataURL = reader.result;
+            // console.log(dataURL)
+            if(name==="marksheet"){
+                this.setState({marksheet : dataURL,marksheetName : fileName})
+            }else if(name === "cv"){
+                this.setState({cv : dataURL,cvName : fileName})
+            }else{
+                this.setState({image : dataURL,uploaded : "Uploaded"})
+            }
+
+
+        }
+        reader.readAsDataURL(input.files[0]);
+
+        reader.onloadstart = () => {
+            console.log("load start")
+        }
+        reader.onloadend = () => {      
+            console.log("load end")
+        } 
+
+    }
+
+    
     render() {
-        // console.log("marksheet",this.state.marksheetName)
+        // console.log("state",this.state)
         return (
             <div className="col-md-12 p-3">
                 <div 
                      className="col-md-6 m-auto p-2 border uploadStudent">
                     <table className="col-md-12 text-center">
-                        <tbody className="">
-                            <tr className="">
-                                <td style={{width : "40%"}} className="">
+                        <tbody >
+                            <tr >
+                                <td style={{width : "40%"}} >
                                     <label  htmlFor="name">Name : </label>
                                 </td>
                                 <td style={{width : "90%"}}>
@@ -45,27 +85,48 @@ export default class uploadStudentData extends Component {
                                         style={{cursor:"pointer"}}
                                         className="col-md-12 p-0">Upload Marksheet</label>
                                     <input 
+                                        name="marksheet"
                                         id="marksheet" 
-                                        onChange={(e) => this.setState({marksheetName : e.target.files[0].name})}
-                                        className="d-none"  type="file"/>
+                                        onChange={ this.file}
+                                        className="d-none"  
+                                        type="file"/>
                                 </td>
-                                <td className="">
-                                    <p  className={(this.state.marksheetName === "" ? "p-2" : "") +" m-0 mw-100 col-md-12"}>{this.state.marksheetName}</p>
+                                <td >
+                                    <p  className={(this.state.marksheetName === "" ? "p-2" : "") +" m-0  col-md-12"}>{this.state.marksheetName}</p>
                                 </td>
                             </tr>
                             <tr>
-                                <td className=" ">
+                                <td>
                                     <label 
                                         htmlFor="cv" 
                                         style={{cursor:"pointer"}}
                                         className="col-md-12  p-0">Upload CV</label>
                                     <input
+                                        name="cv"
                                         id="cv"
-                                        onChange={(e) => this.setState({cvName : e.target.files[0].name})}
-                                        className="d-none"  type="file"/>
+                                        onChange={ this.file}
+                                        className="d-none"  
+                                        type="file"/>
                                 </td>
                                 <td>
                                     <p   className={(this.state.cvName === "" ? "p-2" : " ") +" m-0   col-md-12"}>{this.state.cvName}</p> 
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label 
+                                        htmlFor="image" 
+                                        style={{cursor:"pointer"}}
+                                        className="col-md-12  p-0">Upload image</label>
+                                    <input
+                                        name="image"
+                                        id="image"
+                                        onChange={ this.file}
+                                        className="d-none"  
+                                        type="file"/>
+                                </td>
+                                <td>
+                                    <p   className={(this.state.image === "" ? "p-2 mt-3" : "") +"    col-md-12"}>{this.state.uploaded}</p> 
                                 </td>
                             </tr>
                         </tbody>

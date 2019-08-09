@@ -5,7 +5,7 @@ const router = express.Router()
 // load User Model
 const User = require("../models/Users")
 const Post = require("../models/Post")
-const UploadImagesData = require("../models/UploadImagesData")
+const uploadStudentData = require("../models/UploadImagesData")
 // const fs = require("fs")
 
 const cloudinary = require("cloudinary").v2
@@ -79,20 +79,10 @@ router.get("/fetchStudentsFromDB",(req,res)=>{
         //  console.log("end")
 })
 router.use("/studentDataUpload",(req,res)=>{
+
+    // uploadStudentDaata
     console.log("studentDataUpload req")
-    // cloudinary.uploader.upload(
-    //     "data:text/plain;base64,ZGVtbw=="
-    //     ,{
-    //         public_id : "123456",
-    //         resource_type : "auto"  ,
-    //         folder : "College_Recruitment/Student's_Data/"
-             
-    //     },
-    //      function (err, result){
-    //         console.log("result",result)
-    //         console.log("err",err)
-      
-    // })
+    
 })
 router.post("/uploadPost",(req,res)=>{
     let post = new Post({
