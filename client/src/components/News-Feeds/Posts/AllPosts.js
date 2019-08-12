@@ -8,7 +8,7 @@ import axios from "axios"
     like = (id,index) =>{
 
         const{signin} = this.props
-        console.log("id is",signin.email)
+        // console.log("id is",signin.email)
         axios.post("/LikeClicked",{
             postId : id,
             email : signin.email
@@ -23,7 +23,7 @@ import axios from "axios"
             this.props.AllPosts.map((elem,index)=>{
                 // console.log("likes",elem.likes)
                 const {signin} = this.props
-                console.log("eee",elem.likes)
+                // console.log("eee",elem.likes)
                 if(elem.like === undefined){
                     let like = false
                     elem.likes.forEach((element)=>{
@@ -33,7 +33,7 @@ import axios from "axios"
                     elem.like = like
                     })  
                 }
-                console.log("elem",elem.name)
+                // console.log("elem",elem.name)
                 return(
                     <OutputPostUI 
                         key = {index}

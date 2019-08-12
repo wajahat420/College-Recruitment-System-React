@@ -1,5 +1,4 @@
 {
-  "proxy": "http:\\localhost:4000",
   "name": "react",
   "version": "1.0.0",
   "description": "",
@@ -19,23 +18,11 @@
     "cloudinary": "^1.14.0",
     "concurrently": "^4.1.0",
     "consolidate": "^0.15.1",
-    "crypto": "^1.0.1",
     "express": "^4.17.1",
-    "fs": "0.0.1-security",
-    "gravatar": "^1.8.0",
-    "gridfs-stream": "^1.1.1",
-    "jsonwebtoken": "^8.5.1",
-    "method-override": "^3.0.0",
     "mongoose": "^5.5.12",
-    "multer": "^1.4.1",
-    "multer-gridfs-storage": "^3.2.3",
-    "passport": "^0.4.0",
-    "passport-jwt": "^4.0.0",
     "path": "^0.12.7",
     "react-redux": "^7.1.0",
-    "react-router-dom": "^5.0.1",
-    "validator": "^11.0.0",
-    "yelp-fusion": "^3.0.0"
+    "react-router-dom": "^5.0.1"
   },
   "devDependencies": {
     "nodemon": "^1.19.1"

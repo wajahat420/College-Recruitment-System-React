@@ -6,10 +6,6 @@ var ImageSchema = new Schema({
       type : String,
       require : true,
     },
-    name : {
-      type : String,
-      required : true
-    },
     cgpa : {
       type : String,
       require : true,

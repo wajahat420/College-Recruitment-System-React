@@ -2,6 +2,7 @@ import React from 'react'
 import "../../css/infoBox.css"
 
 import download from "../../images/b2.jpg"
+
 class infoBox extends React.Component {
     render(){
 

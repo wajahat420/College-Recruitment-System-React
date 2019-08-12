@@ -15,6 +15,7 @@ import {connect} from "react-redux"
         // e.preventDefault()
         const {email,password} = this.state
         if(email && password){
+            console.log("email",email)
             axios.post("/login",{
                 email,
                 password
@@ -29,6 +30,7 @@ import {connect} from "react-redux"
                     alert("Invalid Signin")
                 }
             })
+            .catch(err=>alert("Error "+err))
         }
         else{
             alert("Fill All Details")

@@ -1,13 +1,10 @@
 const express = require("express")
 const router = express.Router()
-// const gravatar = require("gravatar")
-// const bcrypt = require("bcryptjs")
-// load User Model
+
 const User = require("../models/Users")
 const Post = require("../models/Post")
-const uploadStudentData = require("../models/UploadImagesData")
-// const fs = require("fs")
-
+const StudentData = require("../models/uploadStudentsData")
+const Feedback = require("../models/Feedback")
 const cloudinary = require("cloudinary").v2
 cloudinary.config({ 
     cloud_name: 'deaz1bojg', 
@@ -43,16 +40,16 @@ router.post("/signup",(req,res)=>{
 })
 
 router.post("/login",(req,res) => {
-    // console.log("req.body",req.body)
     // res.status(500).json({error : "error"})
     email  = req.body.email
     password = req.body.password
+    console.log("email",req.body.email)
  
     User.findOne({email : email})
 
         .then( user => {
-            console.log("user",user.email,user.password)
-            console.log("entered",email,password)
+            // console.log("user",user.email,user.password)
+            // console.log("entered",email,password)
             if(user && password == user.password){
                 res.json({
                     valid : true,
@@ -66,6 +63,7 @@ router.post("/login",(req,res) => {
                 })
             }
         })
+        .catch(err => console.log("error",err))
 })
 router.get("/fetchStudentsFromDB",(req,res)=>{
         const arr = []
@@ -78,11 +76,37 @@ router.get("/fetchStudentsFromDB",(req,res)=>{
          })
         //  console.log("end")
 })
-router.use("/studentDataUpload",(req,res)=>{
+router.use("/uploadStudentData",(req,res)=>{
 
+    let studentData = new StudentData({
+        email : req.body.email,
+        cgpa : req.body.cgpa,
+        cv : req.body.cv,
+        marksheet : req.body.marksheet,
+        img : req.body.image
+    })
+    studentData.save()
+    .then(()=>{
+        res.send(true)
+        console.log("uploaded successfully")
+    })
+    .catch((err)=>{
+        console.log("error",err)
+        res.send(false)
+    })
     // uploadStudentDaata
-    console.log("studentDataUpload req")
+    // console.log("studentDataUpload req")
+    // console.log("data",req.body.email)
     
+})
+router.get("/getAllStudentsData",(req,res)=>{
+    const arr = []
+    StudentData.find().cursor().eachAsync(async (post) => {
+        arr.push(post)
+     })
+     .then(() => {
+        res.send(arr)
+     })
 })
 router.post("/uploadPost",(req,res)=>{
     let post = new Post({
@@ -128,65 +152,32 @@ router.post("/LikeClicked",(req,res)=>{
     )
 })
 
-
-router.post("/upload",(req,res)=> {
-    // console.log("in req")
-    // base64
-    var newImgData;
-    cloudinary.uploader.upload(req.body.imageURL,{ tags: 'basic_sample' }, function (err, result){
-        console.log("result",result.public_id)
-        console.log("err",err)
-            newImgData = new UploadImagesData({
-            imageID : result.public_id,
-            name : req.body.name,
-            price : req.body.price,
-            stock : req.body.stock,
-            category : req.body.category,
-            adminEntry : req.body.adminEntry
-        })
+router.post("/submitFeedback",(req,res)=>{
+    let feedback = new Feedback({
+        email : req.body.email,
+        fulfillingCriteria : req.body.fulfillingCriteria  ,
+        webExperience : req.body.webExperience,
+        requirementFulfill  : req.body.requirementFulfill,
+        searchingFor : req.body.searchingFor,
+        comments  : req.body.comments  
     })
-    .then(response=> {
-        newImgData.save()
-        .then(response=> {
-            res.send(true)
-            console.log("successfully send to mongoDB")
-        } )
-        .catch(err=> {
-            res.send(false)
-            console.log("err in sending",err)
+    feedback.save()
+    .then(()=>{
+        console.log("Submit Successfully",feedback)
+        res.send(true)
     })
-    })
-    .catch(err => res.send(err))
-    
-    // section
-
-
-    
-  
-})
-router.get("/getImages",(req,res)=>{
-    console.log("worksssssssssssssss")
-    
-    cloudinary.api.resources((error,result) => {
-        const arr = []
-        UploadImagesData.find().cursor().eachAsync(async (model) => {
-            arr.push(model)
-            console.log('images', model);
-         })
-         .then(response=> {
-            res.json({
-                images : result.resources,
-                imagesData : arr
-            } )
-         })
+    .catch(()=>{
+        console.log("Error in submission")
     })
 })
-// router.get("/getImagesData",(req,res)=> {
-//     const arr = []
-//     UploadImagesData.find().cursor().eachAsync(async (model) => {
-//         console.log('images', model.nameOfItem);
-//      });
-// })
-
+router.get("/getAllFeedbacks",(req,res)=>{
+    const arr = []
+    Feedback.find().cursor().eachAsync(async (post) => {
+        arr.push(post)
+     })
+     .then(() => {
+        res.send(arr)
+     })
+})
 
 module.exports = router

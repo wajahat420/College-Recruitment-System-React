@@ -1,7 +1,7 @@
 
 const reducer = (state = {
     receiver : "",
-    signin : "",
+    signin : {_id: "5d4df2201ace1337df55b1e7", firstName: "wajahat", lastName: "sarwat", as: "university", email: "shayanmustafa@gmail.com"},
     imageURL : "",
     students : [],
     messages : [],
@@ -10,13 +10,6 @@ const reducer = (state = {
     openMsgWindow : "",
     searchText : "",
     sortBy : "name",
-    users : [
-        {name : "Wajahat",cgpa : "3.4",as:"university",description : "I am university student",cv: "",resume : "",img:""},
-        {name : "Aun",cgpa : "1.2",as:"student",description : "I am university student",cv: "",resume : "",img:""},
-        {name : "Atif",cgpa : "2.4",as:"student",description : "I am university student",cv: "",resume : "",img:""},
-        {name : "Hamza",cgpa : "3.6",as:"student",description : "I am university student",cv: "",resume : "",img:""},
-        {name : "Zafar",cgpa : "1.1",as:"student",description : "I am university student",cv: "",resume : "",img:""}
-    ]
 
 }, action) => {
     switch (action.type) {

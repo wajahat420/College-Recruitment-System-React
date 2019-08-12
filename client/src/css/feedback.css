@@ -1,0 +1,38 @@
+.feedback >div {
+	border: 1.2px solid black;
+}
+.feedback .orange{
+	background-color: rgba(231, 204, 154, 0.562)
+}
+.feedback label:hover,.feedback input:hover{
+	cursor: pointer
+}
+.feedback textarea {
+	overflow: visible;
+	
+}
+
+/* main */
+.feedback-main .link {
+	color: blue;
+	cursor: pointer
+}
+
+/* Feedback-navbar */
+.feedback-navbar {
+	letter-spacing: 1.6px;
+	word-spacing: 5px;
+}
+.feedback-navbar > div > div {
+	cursor: pointer
+}
+
+.feedback-navbar .bgblue {
+	background-color: rgba(0, 0, 255, 0.568);
+}
+
+/* output feedback */
+.fa-long-arrow-right{
+	/* background-color: red; */
+	color: blue;
+}

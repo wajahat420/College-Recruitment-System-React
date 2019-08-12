@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import "../../css/uploadStudentData.css"
+import axios from 'axios';
+import {connect} from "react-redux"
 
-export default class uploadStudentData extends Component {
+class uploadStudentData extends Component {
     state={
         marksheetName : "",
         cvName : "",
-        name : "",
         cgpa : "",
         marksheet :"",
         cv: "",
@@ -14,13 +15,27 @@ export default class uploadStudentData extends Component {
     }
 
     Submit = () => {
-        const {cv,marksheet,name,cgpa,image} = this.state
-        if(cv && marksheet && name && cgpa && image){
-            console.log("All True")
+        const {cv,marksheet,cgpa,image} = this.state
+        if(cv && marksheet  && cgpa && image){
+            // console.log("image",image)
+            axios.post("/uploadStudentData",{
+                email : this.props.signin.email,
+                cgpa,
+                image,
+                cv,
+                marksheet, 
+
+            })
+            .then(res=>{
+                if(res.data){
+                    alert("Successfully Uploaded")
+                }
+            })
+            .catch(err=>alert("error "+err))
         }
     }
     file = (event) =>  {
-        // console.log("working",event.target.name)
+        // console.log("event",event.target.name)
         const name = event.target.name
         const input = event.target;
         const fileName = event.target.files[0].name
@@ -37,8 +52,6 @@ export default class uploadStudentData extends Component {
             }else{
                 this.setState({image : dataURL,uploaded : "Uploaded"})
             }
-
-
         }
         reader.readAsDataURL(input.files[0]);
 
@@ -60,16 +73,7 @@ export default class uploadStudentData extends Component {
                      className="col-md-6 m-auto p-2 border uploadStudent">
                     <table className="col-md-12 text-center">
                         <tbody >
-                            <tr >
-                                <td style={{width : "40%"}} >
-                                    <label  htmlFor="name">Name : </label>
-                                </td>
-                                <td style={{width : "90%"}}>
-                                    <input
-                                        onChange={(e) => this.setState({name : e.target.value})}
-                                        id="name" className="col-md-12 text-center p-1"  type="text" placeholder=""/>
-                                </td>
-                            </tr>
+                      
                             <tr>
                                 <td>
                                     <label htmlFor="cgpa">CGPA : </label>
@@ -144,3 +148,9 @@ export default class uploadStudentData extends Component {
         )
     }
 }
+const mapState = (state) => {
+    return{
+        signin : state.signin
+    }
+}
+export default connect(mapState)(uploadStudentData)

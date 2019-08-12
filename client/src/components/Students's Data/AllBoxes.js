@@ -3,14 +3,30 @@ import {connect} from "react-redux"
 
 import InfoBoxes from "./infoBox"
 import IMG from "../../images/1.jpg"
+import axios from "axios"
 
 
 
  class AllBoxes extends Component {
 
+    constructor(){
+        super()
+        axios.get("/getAllStudentsData")
+        .then(res=>{
+            this.setState({users : res.data})
+        })
+    }
+
+    state = {
+        users : []
+    }
+
     filterArray = (usersObj) => {
+
         const {signin,searchText,sortBy} = this.props
-        // console.log("signin",signin)
+        
+        usersObj.name = usersObj.email.slice(0,usersObj.email.indexOf("@"))
+        let signinUsername = signin.email.slice(0,signin.email.indexOf("@"))
 
         if(searchText !== ""){
             if(sortBy === "name"){
@@ -19,24 +35,23 @@ import IMG from "../../images/1.jpg"
             return usersObj.cgpa.includes(searchText)
         }
         else if(signin.as === "university"){
-            // this.setState({studentSignin : false})
             return true
         }
-        else if(signin.firstName.toLowerCase() === usersObj.name.toLowerCase()){
-            // this.setState({studentSignin : true})
+        else if(signinUsername.toLowerCase() === usersObj.name.toLowerCase()){
             return true
         }
-        // this.setState({studentSignin : false})
         return false
         
     }
 
     render() {
-        // console.log("inrender")
         return (
             <div className="col-md-12 text-center p-0">
                 {
-                    this.props.users.filter((obj) => this.filterArray(obj)).map((elem,index)=>{
+                    this.state.users.filter((obj) => this.filterArray(obj)).map((elem,index)=>{
+
+                        elem.name =  elem.email.slice(0,elem.email.indexOf("@"))
+
                         return (
                                 <div 
                                 key={index} 
@@ -45,7 +60,6 @@ import IMG from "../../images/1.jpg"
                                         cgpa={elem.cgpa}
                                         img ={IMG}
                                         name={elem.name}
-                                        description ={elem.description}
                                         />
                                 </div>
                         )

@@ -16,7 +16,7 @@ import {connect} from "react-redux"
                             <ul className="nav">        
                                 <li><NavLink  to="/News_Feeds"  activeClassName="active-class">News Feeds</NavLink></li>
                                 <li><NavLink to="/Students" activeClassName="active-class">Student's Data</NavLink>  </li>
-                                <li> <NavLink to="/Universities" activeClassName="active-class">Universities Feedbacks</NavLink> </li>
+                                <li className={(this.props.signin.as === "university" ? "":"d-none")}> <NavLink to="/Feedback" activeClassName="active-class">Universities Feedbacks</NavLink> </li>
                                 <li><NavLink exact to="/"  activeClassName="active-class">Login</NavLink></li>
                             </ul>
                         </div>
