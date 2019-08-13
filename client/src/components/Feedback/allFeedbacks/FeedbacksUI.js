@@ -14,19 +14,19 @@ export default function allFeedbacks(props) {
 							<p>Criteria Fulfilled</p>
 							<p>Searched For</p>
 						</div>
-						<div className="col-3 p-0 text-center">
+						<div className="col-2 p-0 text-center">
 							<p className="col-12 m-0 p-0"><i style={{fontSize:"2.3em",width:"100%"}} className="fa  fa-long-arrow-right"></i></p>
 							<p className="col-12 m-0 p-0"><i style={{fontSize:"2.3em",width:"100%"}} className="fa  fa-long-arrow-right"></i></p>
 							<p className="col-12 m-0 p-0"><i style={{fontSize:"2.3em",width:"100%"}} className="fa  fa-long-arrow-right"></i></p>
 							<p className="col-12 m-0 p-0"><i style={{fontSize:"2.3em",width:"100%"}} className="fa  fa-long-arrow-right"></i></p>
 						</div>
-						<div className="col-4 text-right p-0">
+						<div className="col-5 text-right p-0">
 							<p>{props.web}</p>
 							<p>{props.req}</p>
 							<p>{props.criteria}</p>
 							<p>{props.searched}</p>
 						</div>
-						<div className="col-10 m-auto">
+						<div className="col-10 text-center m-auto">
 							{props.comments}
 						</div>
 					</div>

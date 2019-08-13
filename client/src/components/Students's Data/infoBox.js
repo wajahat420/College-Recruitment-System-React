@@ -7,7 +7,7 @@ class infoBox extends React.Component {
     render(){
 
             return (
-                <div className="col-md-12 border p-2 infoBox">
+                <div  className="col-md-12 border p-2 infoBox">
                 
                         <div className="img col-md-12 p-0">
                             <img height="200px" width="100%" className=" p-0" src={this.props.img} alt="no img Found"/>
@@ -19,10 +19,10 @@ class infoBox extends React.Component {
                             className="text-center mb-0  p-0">CGPA : {this.props.cgpa}</p>
                         <small className="p-0">{this.props.description}</small>
                         <div className="row col-md-12 ml-0 p-0 mt-1 footer">
-                            <div className="col-md-6 text-left p-0">
+                            <div className="col-6 text-left p-0">
                                 <a href="#" className=" d-inline-block  p-0  ">Marksheet</a>
                             </div>
-                            <div className="col-md-6 p-0 text-right">
+                            <div className="col-6 p-0 text-right">
                                 <a href={download} download={download} className="d-inline-block   p-0">Resume</a>
                             </div>
                         </div>

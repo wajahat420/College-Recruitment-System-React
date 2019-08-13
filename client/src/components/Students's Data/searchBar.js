@@ -4,14 +4,14 @@ import {connect} from "react-redux"
 class SearchBar extends Component {
     render() {
         return (
-            <div className="col-md-12 m-3">
+            <div style={{minWidth : "350px"}}  className="col-md-12 ">
                 <div className="col-md-8 m-auto">
                     <input 
                         onChange ={(e)=> this.props.searchingText(e.target.value)}
                         className="col-md-12 h4  p-2" type="text" placeholder="Search Students"/>
                     <div className="row ml-0">
-                        <div className="">Search by : </div>
-                        <div className="col-2">
+                        <div >Search by : </div>
+                        <div className="col-md-2">
                             <label style={{cursor:"pointer"}} className="col-9 p-0" htmlFor="name">NAME</label>
                             <input 
                                 defaultChecked={true}
@@ -20,7 +20,7 @@ class SearchBar extends Component {
                                 onClick={()=>this.props.sortBy("name")}
                                 id="name" name="a" type="radio"/>
                         </div>
-                        <div className="col-2">
+                        <div className="col-md-2">
                             <label style={{cursor:"pointer"}} className="col-9  p-0" htmlFor="cgpa">CGPA</label>
                             <input 
                                 style={{cursor:"pointer"}}

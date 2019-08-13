@@ -12,7 +12,7 @@ export default class main extends React.Component {
 	}
 	render(){
 		return (
-			<div className="feedback-main">
+			<div style={{minWidth : "350px"}} className="feedback-main">
 
 				<Navbar
 					checkClicked={this.state.clicked}

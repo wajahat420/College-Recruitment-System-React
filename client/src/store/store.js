@@ -1,7 +1,7 @@
 
 const reducer = (state = {
     receiver : "",
-    signin : {_id: "5d4df2201ace1337df55b1e7", firstName: "wajahat", lastName: "sarwat", as: "university", email: "shayanmustafa@gmail.com"},
+    signin : "",
     imageURL : "",
     students : [],
     messages : [],

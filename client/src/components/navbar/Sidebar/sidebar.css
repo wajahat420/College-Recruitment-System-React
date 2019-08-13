@@ -1,0 +1,38 @@
+.sidebar-div{
+	top: 0;
+	left: 0;
+	height: 100%;
+	z-index: 2000;
+	background-color: rgba(236, 223, 223, 0.877);
+	position: fixed;
+	transition: transform 0.4s ease-in-out;
+	transform: translateX(-100%);
+}
+.sidebar-div.open{
+	transform: translateX(0);
+
+}
+.sidebar-div .close{
+	transform: translateX(-100%);
+}
+
+.sidebar-div > ul {
+	font-size: 1.4em;
+	margin-left: 2%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+}
+.sidebar-div li{
+	padding: 10px;
+}
+.sidebar-div a{
+	color: blue
+}	
+
+@media (min-width : 760px){
+	.sidebar-div{
+		display: none;
+	}
+}

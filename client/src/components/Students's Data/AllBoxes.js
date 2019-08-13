@@ -46,7 +46,7 @@ import axios from "axios"
 
     render() {
         return (
-            <div className="col-md-12 text-center p-0">
+            <div style={{minWidth : "350px"}} className=" col-md-12 text-center p-0">
                 {
                     this.state.users.filter((obj) => this.filterArray(obj)).map((elem,index)=>{
 

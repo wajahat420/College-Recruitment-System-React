@@ -66,9 +66,9 @@ class uploadStudentData extends Component {
 
     
     render() {
-        // console.log("state",this.state)
+        console.log("state",this.props.signin)
         return (
-            <div className="col-md-12 p-3">
+            <div style={{minWidth : "350px"}} className="col-md-12 p-3">
                 <div 
                      className="col-md-6 m-auto p-2 border uploadStudent">
                     <table className="col-md-12 text-center">

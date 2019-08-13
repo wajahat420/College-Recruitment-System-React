@@ -9,6 +9,7 @@
     padding: 0px
 }
 .navbar{
+    z-index: 1000;
     padding: 5px;
     background-color: black;
     color: white
@@ -20,4 +21,14 @@
 .active-class{
     color: blueviolet;
     text-decoration: underline;
+}
+@media (max-width : 760px){
+    .links{
+        display: none
+    }
+    .navbar-header{
+        text-align: center !important;
+        /* margin-left: 50px; */
+        margin: auto
+    }
 }
